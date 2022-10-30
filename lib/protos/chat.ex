@@ -59,8 +59,8 @@ defmodule Protos.Chat do
     name = String.trim(data)
 
     if Regex.match?(~r/^[a-zA-Z0-9]+$/, name) do
-      users = user_list() |> Enum.join(", ")
       join(name)
+      users = user_list() |> Enum.filter(&(&1 != name)) |> Enum.join(", ")
       Socket.send(socket, "* The room contains: #{users}\n")
       {:continue, %{joined: true, name: name}}
     else

@@ -11,7 +11,7 @@ defmodule Protos.Application do
 
   @impl true
   def start(_type, _args) do
-    #'ThousandIsland.Logger.attach_logger(:trace)
+    ThousandIsland.Logger.attach_logger(:info)
 
     children = [
       {Registry, keys: :duplicate, name: Registry.BudgetChat},
@@ -35,7 +35,12 @@ defmodule Protos.Application do
          handler_options: %{},
          transport_options: [packet: :line, buffer: 32000]}
       ),
-      {Protos.Database, 9905}
+      {Protos.Database, 9905},
+      child_spec(
+        :mob,
+        {ThousandIsland,
+         port: 9906, handler_module: Protos.Mob, transport_options: [packet: :line, buffer: 32000]}
+      )
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
