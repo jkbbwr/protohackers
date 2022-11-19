@@ -14,7 +14,7 @@ defmodule Protos.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger],
+      extra_applications: [:logger, :lettuce],
       mod: {Protos.Application, []}
     ]
   end
@@ -25,9 +25,9 @@ defmodule Protos.MixProject do
       {:thousand_island, "~> 0.5.11"},
       {:telemetry, "~> 1.1.0"},
       {:jason, "~> 1.4.0"},
-      {:skooma, "~> 0.2.0"},
       {:prime, "~> 0.1.1"},
-      {:jsx, "~> 3.1"}
+      {:ets, "~> 0.9.0"},
+      {:lettuce, "~> 0.2.0", only: :dev}
     ]
   end
 end
